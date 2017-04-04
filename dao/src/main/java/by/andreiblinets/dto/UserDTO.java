@@ -1,13 +1,11 @@
 package by.andreiblinets.dto;
 
-import by.andreiblinets.entity.enumus.RolesUser;
-
 public class UserDTO {
     private long id;
     private String name;
-    private RolesUser rolesUser;
+    private String rolesUser;
 
-    public UserDTO(long id, String name, RolesUser rolesUser) {
+    public UserDTO(long id, String name, String rolesUser) {
         this.id = id;
         this.name = name;
         this.rolesUser = rolesUser;
@@ -32,11 +30,11 @@ public class UserDTO {
         this.name = name;
     }
 
-    public RolesUser getRolesUser() {
+    public String getRolesUser() {
         return rolesUser;
     }
 
-    public void setRolesUser(RolesUser rolesUser) {
+    public void setRolesUser(String rolesUser) {
         this.rolesUser = rolesUser;
     }
 
