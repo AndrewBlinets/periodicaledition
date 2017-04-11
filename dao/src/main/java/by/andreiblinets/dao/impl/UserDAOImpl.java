@@ -1,8 +1,10 @@
-package by.andreiblinets.dao;
+package by.andreiblinets.dao.impl;
 
-import by.andreiblinets.dto.UserDTO;
-import by.andreiblinets.utils.ConnectorDB;
-import by.andreiblinets.utils.Constants;
+import by.andreiblinets.dao.UserDAO;
+import by.andreiblinets.entity.User;
+import by.andreiblinets.entity.enums.UserRole;
+import by.andreiblinets.util.ConnectionPool;
+import by.andreiblinets.util.Constants;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,19 +12,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class UserDAOImp implements UserDAO{
+public class UserDAOImpl implements UserDAO {
 
-    public UserDTO checkAutification(String login, String password) {
+    public User checkAutification(String login, String password) {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        UserDTO userDTO = null;
+        User user = null;
         try {
-            connection = ConnectorDB.getConnector();
+           // connection = ConnectionPool.getConnector();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(Constants.SQL_QUERY_GET_USER);
             if (resultSet.next()) {
-                userDTO = getObjectUserDTO(resultSet);
+                user = getObjectUserDTO(resultSet);
             }
             else
                 return null;
@@ -45,14 +47,14 @@ public class UserDAOImp implements UserDAO{
                 //e.printStackTrace();
             }
         }
-        return userDTO;
+        return user;
     }
 
-    private UserDTO getObjectUserDTO(ResultSet resultSet) throws SQLException {
-        UserDTO userDTO = new UserDTO();
+    private User getObjectUserDTO(ResultSet resultSet) throws SQLException {
+        User userDTO = new User();
         userDTO.setId(resultSet.getInt(1));
         userDTO.setName(resultSet.getString(2));
-        userDTO.setRolesUser(resultSet.getString(3));
+        userDTO.setUserRole(UserRole.valueOf(resultSet.getString(3)));
         return userDTO;
     }
 }

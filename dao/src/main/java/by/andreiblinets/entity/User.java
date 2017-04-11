@@ -1,6 +1,6 @@
 package by.andreiblinets.entity;
 
-import by.andreiblinets.entity.enumus.RolesUser;
+import by.andreiblinets.entity.enums.UserRole;
 
 public class User {
 
@@ -8,14 +8,14 @@ public class User {
     private String login;
     private String password;
     private String name;
-    private RolesUser rolesUser;
+    private UserRole userRole;
 
-    public User(long id, String login, String password, String name, RolesUser rolesUser) {
+    public User(long id, String login, String password, String name, UserRole userRole) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
-        this.rolesUser = rolesUser;
+        this.userRole = userRole;
     }
 
     public User() {
@@ -53,12 +53,12 @@ public class User {
         this.name = name;
     }
 
-    public RolesUser getRolesUser() {
-        return rolesUser;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRolesUser(RolesUser rolesUser) {
-        this.rolesUser = rolesUser;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class User {
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        return rolesUser == user.rolesUser;
+        return userRole == user.userRole;
     }
 
     @Override
@@ -81,18 +81,19 @@ public class User {
         result = 31 * result + (login != null ? login.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (rolesUser != null ? rolesUser.hashCode() : 0);
+        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", rolesUser=" + rolesUser +
-                '}';
+        final StringBuffer sb = new StringBuffer("User{");
+        sb.append("id=").append(id);
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", userRole=").append(userRole);
+        sb.append('}');
+        return sb.toString();
     }
 }

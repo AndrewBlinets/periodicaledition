@@ -1,20 +1,21 @@
-package by.andreiblinets.dao;
+package by.andreiblinets.dao.impl;
 
+import by.andreiblinets.dao.SubscriptionDAO;
 import by.andreiblinets.entity.Subscription;
-import by.andreiblinets.utils.ConnectorDB;
-import by.andreiblinets.utils.Constants;
+import by.andreiblinets.util.ConnectionPool;
+import by.andreiblinets.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SubscriptionDAOImp implements SubscriptionDAO {
+public class SubscriptionDAOImpl implements SubscriptionDAO {
 
     public void addSubscription(Subscription subscription) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = ConnectorDB.getConnector();
+           // connection = ConnectionPool.getConnector();
             preparedStatement = connection
                     .prepareStatement(Constants.SQL_QUERY_ADD_SUBSCRIPTION);
             preparedStatement.setString(1, String.valueOf(subscription.getIdUser()));

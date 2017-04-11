@@ -1,20 +1,21 @@
-package by.andreiblinets.dao;
+package by.andreiblinets.dao.impl;
 
+import by.andreiblinets.dao.PeriodicalEditionDAO;
 import by.andreiblinets.entity.PeriodicalEdition;
-import by.andreiblinets.utils.ConnectorDB;
-import by.andreiblinets.utils.Constants;
+import by.andreiblinets.util.ConnectionPool;
+import by.andreiblinets.util.Constants;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PeriodicalEditionDAOImp implements PeriodicalEditionDAO {
+public class PeriodicalEditionDAOImpl implements PeriodicalEditionDAO {
 
     public void addPeridicalEdition(PeriodicalEdition periodicalEdition) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = ConnectorDB.getConnector();
+           // connection = ConnectionPool.getConnector();
             preparedStatement = connection
                     .prepareStatement(Constants.SQL_QUERY_ADD_PERIODICALEDITION);
             preparedStatement.setString(1, periodicalEdition.getName());
@@ -45,7 +46,7 @@ public class PeriodicalEditionDAOImp implements PeriodicalEditionDAO {
         ResultSet resultSet = null;
         List<PeriodicalEdition> periodicalEditions = null;
         try {
-            connection = ConnectorDB.getConnector();
+          //  connection = ConnectionPool.getConnector();
             statement = connection.createStatement();
             periodicalEditions = parserRequest(statement.executeQuery(Constants.SQL_QUERY_GET_PERIODICALEDITION));
         }catch (SQLException e) {

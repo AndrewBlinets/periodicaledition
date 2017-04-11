@@ -1,22 +1,23 @@
-package by.andreiblinets.dao;
+package by.andreiblinets.dao.impl;
 
+import by.andreiblinets.dao.PaymentDAO;
 import by.andreiblinets.entity.Payment;
-import by.andreiblinets.utils.ConnectorDB;
-import by.andreiblinets.utils.Constants;
+import by.andreiblinets.util.ConnectionPool;
+import by.andreiblinets.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class PaymentDAOImp implements PaymentDAO{
+public class PaymentDAOImpl implements PaymentDAO {
 
     public void addPayment(Payment payment) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
-            connection = ConnectorDB.getConnector();
+           // connection = ConnectionPool.getConnector();
             preparedStatement = connection
-                    .prepareStatement(Constants.SQL_QUERY_ADD_Payment);
+                    .prepareStatement(Constants.SQL_QUERY_ADD_PAYMENT);
             preparedStatement.setString(1, String.valueOf(payment.getIdUser()));
             preparedStatement.setString(2, String.valueOf(payment.getSumma()));
             preparedStatement.executeUpdate();
