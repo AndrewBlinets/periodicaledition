@@ -1,30 +1,29 @@
 package by.andreiblinets.dao.impl;
 
-import by.andreiblinets.dao.SubscriptionDAO;
-import by.andreiblinets.entity.Subscription;
-import by.andreiblinets.util.ConnectionPool;
+import by.andreiblinets.dao.IPaymentDAO;
+import by.andreiblinets.entity.Payment;
 import by.andreiblinets.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class SubscriptionDAOImpl implements SubscriptionDAO {
+public class IPaymentDAOImpl implements IPaymentDAO {
 
-    public void addSubscription(Subscription subscription) {
+    public void addPayment(Payment payment) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try {
            // connection = ConnectionPool.getConnector();
             preparedStatement = connection
-                    .prepareStatement(Constants.SQL_QUERY_ADD_SUBSCRIPTION);
-            preparedStatement.setString(1, String.valueOf(subscription.getIdUser()));
-            preparedStatement.setString(2, String.valueOf(subscription.getIdPeriodicalEdition()));
+                    .prepareStatement(Constants.SQL_QUERY_ADD_PAYMENT);
+            preparedStatement.setString(1, String.valueOf(payment.getIdUser()));
+            preparedStatement.setString(2, String.valueOf(payment.getSumma()));
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred during add SUBSCRIPTION");
-            // e.printStackTrace();
+            System.out.println("SQL exception occurred during add payment");
+           // e.printStackTrace();
         } finally {
             try {
                 if (preparedStatement != null) {
@@ -34,7 +33,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
                     connection.close();
                 }
             } catch (SQLException e) {
-                System.out.println("SQL exception occurred during add SUBSCRIPTION");
+                System.out.println("SQL exception occurred during add payment");
                 //e.printStackTrace();
             }
         }

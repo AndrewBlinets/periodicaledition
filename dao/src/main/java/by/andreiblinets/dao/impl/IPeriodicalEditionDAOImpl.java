@@ -1,15 +1,14 @@
 package by.andreiblinets.dao.impl;
 
-import by.andreiblinets.dao.PeriodicalEditionDAO;
+import by.andreiblinets.dao.IPeriodicalEditionDAO;
 import by.andreiblinets.entity.PeriodicalEdition;
-import by.andreiblinets.util.ConnectionPool;
 import by.andreiblinets.util.Constants;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PeriodicalEditionDAOImpl implements PeriodicalEditionDAO {
+public class IPeriodicalEditionDAOImpl implements IPeriodicalEditionDAO {
 
     public void addPeridicalEdition(PeriodicalEdition periodicalEdition) {
         Connection connection = null;

@@ -1,9 +1,9 @@
 package singleton;
 
-import by.andreiblinets.dao.UserDAO;
+import by.andreiblinets.dao.IUserDAO;
 
 public class UserSingleton {
-    private static UserDAO userDAO;
+    private static IUserDAO IUserDAO;
 
 
 }
