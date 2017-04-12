@@ -18,6 +18,19 @@ public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
 
     private static Logger logger = Logger.getLogger(IUserDAOImpl.class.getName());
 
+    private static ISubscriptionDAOImpl instance;
+
+    private ISubscriptionDAOImpl() {
+        super();
+    }
+
+    public synchronized static ISubscriptionDAOImpl getInstance() {
+        if (instance == null) {
+            instance = new ISubscriptionDAOImpl();
+        }
+        return instance;
+    }
+
     public Long create(Subscription subscription) {
         Long createId = null;
         ResultSet resultSet = null;

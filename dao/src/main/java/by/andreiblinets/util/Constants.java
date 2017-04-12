@@ -3,9 +3,13 @@ package by.andreiblinets.util;
 public class Constants {
     public static final String SQL_QUERY_ADD_PAYMENT = "INSERT INTO createpayment (iduser,kol) VALUES (?,?)";
 
-    public static final String SQL_QUERY_ADD_PERIODICALEDITION = "INSERT periodicaleditiontable createpayment" +
-            " (name,price) VALUES (?,?)";
-    public static final String SQL_QUERY_GET_PERIODICALEDITION = "SELECT * FROM periodicaleditiontable";
+    public static final String SQL_QUERY_CREATE_PERIODICALEDITION = "INSERT periodicaleditiontable createpayment" +
+                                                                    " (name,price) VALUES (?,?)";
+    public static final String SQL_QUERY_GET_ALL_PERIODICALEDITION = "SELECT * FROM periodicaleditiontable";
+    public static final String SQL_QUERY_GET_BY_ID_PERIODICALEDITION = "SELECT * FROM periodicaleditiontable WHERE id = ?";
+    public static final String SQL_QUERY_UPDATE_BY_ID_PERIODICALEDITION = "UPDATE periodicaleditiontable" +
+            " SET 'name' = ?,  'price' = ?  WHERE id = ?";
+    public static final String SQL_QUERY_DELETE_BY_ID_PERIODICALEDITION = "DELETE FROM periodicaleditiontable WHERE id = ?";
 
     public static final String SQL_QUERY_CREATE_SUBSCRIPTION = "INSERT subscription createpayment" +
             " (iduser,idperiodicaleditio) VALUES (?,?)";
