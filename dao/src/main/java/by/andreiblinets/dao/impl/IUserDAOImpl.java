@@ -58,7 +58,18 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
     }
 
     public void update(User user) {
-        //
+        try {
+            preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_UPDATE_BY_ID_USER);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, String.valueOf(user.getUserRole()));
+            preparedStatement.setString(3, user.getLogin());
+            preparedStatement.setString(4, Coder.getHashCode(user.getPassword()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("SQLException  in IUserDAOImpl update()" + e );
+        } finally {
+            closePreparedStatement(preparedStatement);
+        }
     }
 
     public List<User> readAll() {

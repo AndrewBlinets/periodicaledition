@@ -1,6 +1,7 @@
 package by.andreiblinets.dao.impl;
 
-import by.andreiblinets.dao.IPeriodicalEditionDAO;
+import by.andreiblinets.dao.BaseDAO;
+import by.andreiblinets.entity.Payment;
 import by.andreiblinets.entity.PeriodicalEdition;
 import by.andreiblinets.util.Constants;
 
@@ -8,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IPeriodicalEditionDAOImpl implements IPeriodicalEditionDAO {
+public class IPeriodicalEditionDAOImpl extends BaseDAO<Payment> {
 
     public void addPeridicalEdition(PeriodicalEdition periodicalEdition) {
         Connection connection = null;
@@ -82,4 +83,23 @@ public class IPeriodicalEditionDAOImpl implements IPeriodicalEditionDAO {
         return clients;
     }
 
+    public Long create(Payment payment) {
+        return null;
+    }
+
+    public void update(Payment payment) {
+
+    }
+
+    public List<Payment> readAll() {
+        return null;
+    }
+
+    public Payment readById(Long id) {
+        return null;
+    }
+
+    public void delete(Long id) {
+
+    }
 }

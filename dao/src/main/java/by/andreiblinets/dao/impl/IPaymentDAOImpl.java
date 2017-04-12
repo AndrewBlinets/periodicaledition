@@ -1,14 +1,15 @@
 package by.andreiblinets.dao.impl;
 
-import by.andreiblinets.dao.IPaymentDAO;
+import by.andreiblinets.dao.BaseDAO;
 import by.andreiblinets.entity.Payment;
 import by.andreiblinets.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
-public class IPaymentDAOImpl implements IPaymentDAO {
+public class IPaymentDAOImpl extends BaseDAO<Payment> {
 
     public void addPayment(Payment payment) {
         Connection connection = null;
@@ -37,5 +38,25 @@ public class IPaymentDAOImpl implements IPaymentDAO {
                 //e.printStackTrace();
             }
         }
+    }
+
+    public Long create(Payment payment) {
+        return null;
+    }
+
+    public void update(Payment payment) {
+
+    }
+
+    public List<Payment> readAll() {
+        return null;
+    }
+
+    public Payment readById(Long id) {
+        return null;
+    }
+
+    public void delete(Long id) {
+
     }
 }
