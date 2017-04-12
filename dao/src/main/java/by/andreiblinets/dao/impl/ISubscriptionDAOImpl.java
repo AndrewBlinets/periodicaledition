@@ -16,7 +16,7 @@ import static by.andreiblinets.util.DaoUtils.closeResultSet;
 
 public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
 
-    private static Logger logger = Logger.getLogger(IUserDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(ISubscriptionDAOImpl.class.getName());
 
     private static ISubscriptionDAOImpl instance;
 

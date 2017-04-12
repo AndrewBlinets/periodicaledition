@@ -14,7 +14,7 @@ import static by.andreiblinets.util.DaoUtils.closeResultSet;
 
 public class IPeriodicalEditionDAOImpl extends BaseDAO<PeriodicalEdition> {
 
-    private static Logger logger = Logger.getLogger(IUserDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(IPeriodicalEditionDAOImpl.class.getName());
 
     private static IPeriodicalEditionDAOImpl instance;
 
@@ -85,7 +85,7 @@ public class IPeriodicalEditionDAOImpl extends BaseDAO<PeriodicalEdition> {
 
     private PeriodicalEdition getObjectPeriodicalEdition(ResultSet resultSet, PeriodicalEdition periodicalEdition) throws SQLException {
         periodicalEdition.setName(resultSet.getString(1));
-        periodicalEdition.setPrice(resultSet.getInt(2));;
+        periodicalEdition.setPrice(resultSet.getInt(2));
         return periodicalEdition;
     }
 

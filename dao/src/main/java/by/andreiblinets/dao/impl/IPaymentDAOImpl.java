@@ -16,7 +16,7 @@ import static by.andreiblinets.util.DaoUtils.closeResultSet;
 public class IPaymentDAOImpl extends BaseDAO<Payment> {
 
 
-    private static Logger logger = Logger.getLogger(IUserDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(IPaymentDAOImpl.class.getName());
 
     private static IPaymentDAOImpl instance;
 
