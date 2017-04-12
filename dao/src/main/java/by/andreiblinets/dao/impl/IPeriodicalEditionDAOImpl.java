@@ -33,7 +33,7 @@ public class IPeriodicalEditionDAOImpl extends BaseDAO<PeriodicalEdition> {
         Long createId = null;
         ResultSet resultSet = null;
         try {
-            preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_CREATE_SUBSCRIPTION);
+            preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_CREATE_PERIODICALEDITION);
             preparedStatement.setString(1, periodicalEdition.getName());
             preparedStatement.setString(3, String.valueOf(periodicalEdition.getPrice()));
             preparedStatement.executeUpdate();
