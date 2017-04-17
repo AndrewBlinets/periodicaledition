@@ -11,6 +11,8 @@
 
     <artifactId>dao</artifactId>
 
+    <packaging>jar</packaging>
+
     <properties>
         <mysql-connector-java.version>6.0.5</mysql-connector-java.version>
         <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
