@@ -1,6 +1,7 @@
 package by.andreiblinets.util;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.log4j.Logger;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -11,9 +12,10 @@ import java.util.ResourceBundle;
 
 public class ConnectionPool {
 
+    private static Logger logger = Logger.getLogger(Coder.class.getName());
+
     private static ConnectionPool instance;
     private static BasicDataSource dataSource = new BasicDataSource();
-    private static final ThreadLocal<Connection> threadConnection = new ThreadLocal<Connection>();
 
     public ConnectionPool() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
@@ -23,16 +25,6 @@ public class ConnectionPool {
         dataSource.setUrl(resourceBundle.getString("db.url"));
     }
 
-    public Connection getConnection() throws SQLException {
-
-        if (threadConnection.get() == null) {
-            Connection connection = dataSource.getConnection();
-            threadConnection.set(connection);
-            return threadConnection.get();
-        } else
-            return threadConnection.get();
-    }
-
     public synchronized static ConnectionPool getInstance() throws IOException, SQLException, PropertyVetoException {
         if (instance == null) {
             instance = new ConnectionPool();
@@ -40,5 +32,15 @@ public class ConnectionPool {
         } else {
             return instance;
         }
+    }
+
+    public Connection getConnection() {
+        Connection connection = null;
+        try {
+            connection =  dataSource.getConnection();
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return connection;
     }
 }

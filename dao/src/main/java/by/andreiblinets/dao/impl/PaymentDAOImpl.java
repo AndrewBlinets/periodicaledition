@@ -13,20 +13,20 @@ import java.util.List;
 import static by.andreiblinets.util.DaoUtils.closePreparedStatement;
 import static by.andreiblinets.util.DaoUtils.closeResultSet;
 
-public class IPaymentDAOImpl extends BaseDAO<Payment> {
+public class PaymentDAOImpl extends BaseDAO<Payment> {
 
 
-    private static Logger logger = Logger.getLogger(IPaymentDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(PaymentDAOImpl.class.getName());
 
-    private static IPaymentDAOImpl instance;
+    private static PaymentDAOImpl instance;
 
-    private IPaymentDAOImpl() {
+    private PaymentDAOImpl() {
         super();
     }
 
-    public synchronized static IPaymentDAOImpl getInstance() {
+    public synchronized static PaymentDAOImpl getInstance() {
         if (instance == null) {
-            instance = new IPaymentDAOImpl();
+            instance = new PaymentDAOImpl();
         }
         return instance;
     }
@@ -59,7 +59,7 @@ public class IPaymentDAOImpl extends BaseDAO<Payment> {
             preparedStatement.setString(2, String.valueOf(payment.getSumma()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQLException  in IPaymentDAOImpl update()" + e );
+            logger.error("SQLException  in PaymentDAOImpl update()" + e );
         } finally {
             closePreparedStatement(preparedStatement);
         }
@@ -72,12 +72,12 @@ public class IPaymentDAOImpl extends BaseDAO<Payment> {
             preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_GET_ALL_PAYMENT);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Payment payment = new Payment();
-                payment = getObjectUserPayment(resultSet, payment);
+                Payment payment;
+                payment = getObjectUserPayment(resultSet);
                 payments.add(payment);
             }
         } catch (SQLException e) {
-            logger.error("SQLException  in IPaymentDAOImpl readAll()" + e );
+            logger.error("SQLException  in PaymentDAOImpl readAll()" + e );
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -93,11 +93,10 @@ public class IPaymentDAOImpl extends BaseDAO<Payment> {
             preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                payment = new Payment();
-                payment = getObjectUserPayment(resultSet, payment);
+                payment = getObjectUserPayment(resultSet);
             }
         } catch (SQLException e) {
-            logger.error("SQLException  in IPaymentDAOImpl readById()" + e );
+            logger.error("SQLException  in PaymentDAOImpl readById()" + e );
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -111,13 +110,14 @@ public class IPaymentDAOImpl extends BaseDAO<Payment> {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQLException  in IPaymentDAOImpl delete(id)" + e );
+            logger.error("SQLException  in PaymentDAOImpl delete(id)" + e );
         } finally {
             closePreparedStatement(preparedStatement);
         }
     }
 
-    private Payment getObjectUserPayment(ResultSet resultSet, Payment payment) throws SQLException {
+    private Payment getObjectUserPayment(ResultSet resultSet) throws SQLException {
+        Payment payment = new Payment();
         payment.setId(resultSet.getInt(1));
         payment.setIdUser(resultSet.getInt(2));
         payment.setSumma(resultSet.getInt(3));

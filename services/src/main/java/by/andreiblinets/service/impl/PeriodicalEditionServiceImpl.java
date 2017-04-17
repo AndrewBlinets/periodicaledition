@@ -1,6 +1,6 @@
 package by.andreiblinets.service.impl;
 
-import by.andreiblinets.dao.impl.IPeriodicalEditionDAOImpl;
+import by.andreiblinets.dao.impl.PeriodicalEditionDAOImpl;
 import by.andreiblinets.entity.PeriodicalEdition;
 import by.andreiblinets.service.IService;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public class PeriodicalEditionServiceImpl implements IService<PeriodicalEdition> {
 
     private static PeriodicalEditionServiceImpl instance;
-    private IPeriodicalEditionDAOImpl periodicalEditionDAO = IPeriodicalEditionDAOImpl.getInstance();
+    private PeriodicalEditionDAOImpl periodicalEditionDAO = PeriodicalEditionDAOImpl.getInstance();
 
     public synchronized static PeriodicalEditionServiceImpl getInstance() {
         if (instance == null) {

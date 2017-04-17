@@ -1,6 +1,6 @@
 package by.andreiblinets.service.impl;
 
-import by.andreiblinets.dao.impl.IUserDAOImpl;
+import by.andreiblinets.dao.impl.UserDAOImpl;
 import by.andreiblinets.entity.User;
 import by.andreiblinets.service.IUserService;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public class UserServiceImp implements IUserService {
 
     private static UserServiceImp instance;
-    private IUserDAOImpl userDAO = IUserDAOImpl.getInstance();
+    private UserDAOImpl userDAO = UserDAOImpl.getInstance();
 
     public synchronized static UserServiceImp getInstance() {
         if (instance == null) {

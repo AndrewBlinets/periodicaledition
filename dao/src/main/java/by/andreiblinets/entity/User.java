@@ -2,6 +2,7 @@ package by.andreiblinets.entity;
 
 import by.andreiblinets.entity.enums.UserRole;
 
+
 public class User {
 
     private long id;
@@ -64,24 +65,24 @@ public class User {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        return userRole == user.userRole;
+        if (getId() != user.getId()) return false;
+        if (!getLogin().equals(user.getLogin())) return false;
+        if (!getPassword().equals(user.getPassword())) return false;
+        if (!getName().equals(user.getName())) return false;
+        return getUserRole() == user.getUserRole();
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (userRole != null ? userRole.hashCode() : 0);
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + getLogin().hashCode();
+        result = 31 * result + getPassword().hashCode();
+        result = 31 * result + getName().hashCode();
+        result = 31 * result + getUserRole().hashCode();
         return result;
     }
 

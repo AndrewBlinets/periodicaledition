@@ -17,19 +17,19 @@ import static by.andreiblinets.util.DaoUtils.closePreparedStatement;
 import static by.andreiblinets.util.DaoUtils.closeResultSet;
 
 
-public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
+public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 
-    private static Logger logger = Logger.getLogger(IUserDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
 
-    private static IUserDAOImpl instance;
+    private static UserDAOImpl instance;
 
-    private IUserDAOImpl() {
+    private UserDAOImpl() {
         super();
     }
 
-    public synchronized static IUserDAOImpl getInstance() {
+    public synchronized static UserDAOImpl getInstance() {
         if (instance == null) {
-            instance = new IUserDAOImpl();
+            instance = new UserDAOImpl();
         }
         return instance;
     }
@@ -66,7 +66,7 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
             preparedStatement.setString(4, Coder.getHashCode(user.getPassword()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQLException  in IUserDAOImpl update()" + e );
+            logger.error("SQLException  in UserDAOImpl update()" + e );
         } finally {
             closePreparedStatement(preparedStatement);
         }
@@ -79,12 +79,12 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
             preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_GET_ALL_USER);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                User user = new User();
-                user = getObjectUser(resultSet, user);
+                User user;
+                user = getObjectUser(resultSet);
                 users.add(user);
             }
         } catch (SQLException e) {
-            logger.error("SQLException  in IUserDAOImpl readAll()" + e );
+            logger.error("SQLException  in UserDAOImpl readAll()" + e );
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -100,11 +100,10 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
             preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                user = new User();
-                user = getObjectUser(resultSet, user);
+                user = getObjectUser(resultSet);
             }
         } catch (SQLException e) {
-            logger.error("SQLException  in IUserDAOImpl readById()" + e );
+            logger.error("SQLException  in UserDAOImpl readById()" + e );
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -118,7 +117,7 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQLException  in IUserDAOImpl delete(id)" + e );
+            logger.error("SQLException  in UserDAOImpl delete(id)" + e );
         } finally {
             closePreparedStatement(preparedStatement);
         }
@@ -134,8 +133,7 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
             preparedStatement.setString(2, passwordHash);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                user = new User();
-                user = getObjectUser(resultSet, user);
+                user = getObjectUser(resultSet);
             }
         } catch (SQLException e) {
             logger.error("SQLException  in getUser(login, password)" + e );
@@ -146,7 +144,8 @@ public class IUserDAOImpl extends BaseDAO<User> implements IUserDAO {
         return user;
     }
 
-    private User getObjectUser(ResultSet resultSet, User user) throws SQLException {
+    private User getObjectUser(ResultSet resultSet) throws SQLException {
+        User user = new User();
         user.setId(resultSet.getInt(1));
         user.setName(resultSet.getString(2));
         user.setUserRole(UserRole.valueOf(resultSet.getString(3)));

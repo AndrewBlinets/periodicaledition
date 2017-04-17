@@ -2,7 +2,6 @@ package by.andreiblinets.dao.impl;
 
 import by.andreiblinets.dao.BaseDAO;
 import by.andreiblinets.entity.Subscription;
-import by.andreiblinets.util.Coder;
 import by.andreiblinets.util.Constants;
 import org.apache.log4j.Logger;
 
@@ -14,19 +13,19 @@ import java.util.List;
 import static by.andreiblinets.util.DaoUtils.closePreparedStatement;
 import static by.andreiblinets.util.DaoUtils.closeResultSet;
 
-public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
+public class SubscriptionDAOImpl extends BaseDAO<Subscription>  {
 
-    private static Logger logger = Logger.getLogger(ISubscriptionDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(SubscriptionDAOImpl.class.getName());
 
-    private static ISubscriptionDAOImpl instance;
+    private static SubscriptionDAOImpl instance;
 
-    private ISubscriptionDAOImpl() {
+    private SubscriptionDAOImpl() {
         super();
     }
 
-    public synchronized static ISubscriptionDAOImpl getInstance() {
+    public synchronized static SubscriptionDAOImpl getInstance() {
         if (instance == null) {
-            instance = new ISubscriptionDAOImpl();
+            instance = new SubscriptionDAOImpl();
         }
         return instance;
     }
@@ -59,7 +58,7 @@ public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
             preparedStatement.setString(2, String.valueOf(subscription.getIdPeriodicalEdition()));
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQLException  in ISubscriptionDAOImpl update()" + e );
+            logger.error("SQLException  in SubscriptionDAOImpl update()" + e );
         } finally {
             closePreparedStatement(preparedStatement);
         }
@@ -72,12 +71,12 @@ public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
             preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_GET_ALL_SUBSCRIPTION);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Subscription subscription = new Subscription();
-                subscription = getObjectSubscription(resultSet, subscription);
+                Subscription subscription;
+                subscription = getObjectSubscription(resultSet);
                 subscriptions.add(subscription);
             }
         } catch (SQLException e) {
-            logger.error("SQLException  in IUserDAOImpl readAll()" + e );
+            logger.error("SQLException  in UserDAOImpl readAll()" + e );
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -93,11 +92,10 @@ public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
             preparedStatement.setLong(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                subscription = new Subscription();
-                subscription = getObjectSubscription(resultSet, subscription);
+                subscription = getObjectSubscription(resultSet);
             }
         } catch (SQLException e) {
-            logger.error("SQLException  in IUserDAOImpl readById()" + e );
+            logger.error("SQLException  in UserDAOImpl readById()" + e );
         } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
@@ -105,7 +103,8 @@ public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
         return subscription;
     }
 
-    private Subscription getObjectSubscription(ResultSet resultSet, Subscription subscription) throws SQLException {
+    private Subscription getObjectSubscription(ResultSet resultSet) throws SQLException {
+        Subscription subscription = new Subscription();
         subscription.setId(resultSet.getInt(1));
         subscription.setIdPeriodicalEdition(resultSet.getInt(2));
         subscription.setIdUser(resultSet.getInt(3));
@@ -118,7 +117,7 @@ public class ISubscriptionDAOImpl  extends BaseDAO<Subscription>  {
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQLException  in ISubscriptionDAOImpl delete(id)" + e );
+            logger.error("SQLException  in SubscriptionDAOImpl delete(id)" + e );
         } finally {
             closePreparedStatement(preparedStatement);
         }

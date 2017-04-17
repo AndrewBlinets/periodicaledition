@@ -1,7 +1,7 @@
 package by.andreiblinets.service.impl;
 
 
-import by.andreiblinets.dao.impl.IPaymentDAOImpl;
+import by.andreiblinets.dao.impl.PaymentDAOImpl;
 import by.andreiblinets.entity.Payment;
 import by.andreiblinets.service.IService;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class PaymentServiceImpl implements IService<Payment> {
 
     private static PaymentServiceImpl instance;
-    private IPaymentDAOImpl paymentDAO = IPaymentDAOImpl.getInstance();
+    private PaymentDAOImpl paymentDAO = PaymentDAOImpl.getInstance();
 
     public synchronized static PaymentServiceImpl getInstance() {
         if (instance == null) {
