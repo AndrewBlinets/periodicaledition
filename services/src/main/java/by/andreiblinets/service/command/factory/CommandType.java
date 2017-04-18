@@ -4,10 +4,11 @@ import by.andreiblinets.service.command.ICommand;
 import by.andreiblinets.service.command.user.GoBackCommand;
 import by.andreiblinets.service.command.user.GoToRegistration;
 import by.andreiblinets.service.command.user.LoginUser;
+import by.andreiblinets.service.command.user.RegistrationCommand;
 
 public enum CommandType {
 
-    LOGIN, GOTOREGISTRATION, BACK;
+    LOGIN, GOTOREGISTRATION, BACK, REGISTRATION;
 
     public ICommand getCurrentCommand() throws EnumConstantNotPresentException{
         switch(this){
@@ -19,6 +20,9 @@ public enum CommandType {
 
             case BACK:
                 return new GoBackCommand();
+
+            case REGISTRATION:
+                return new RegistrationCommand();
 
             default:
                 return new LoginUser();

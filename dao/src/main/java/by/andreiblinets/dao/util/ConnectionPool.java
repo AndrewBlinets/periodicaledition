@@ -7,6 +7,7 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ConnectionPool {
@@ -17,7 +18,9 @@ public class ConnectionPool {
     private static BasicDataSource dataSource = new BasicDataSource();
 
     public ConnectionPool() {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("database");
+        //Locale locale = new Locale("ru-Ru");
+       // ResourceBundle resourceBundle = ResourceBundle.getBundle("database",locale);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
         dataSource.setDriverClassName(resourceBundle.getString("db.driver"));
         dataSource.setUsername(resourceBundle.getString("db.user"));
         dataSource.setPassword(resourceBundle.getString("db.password"));

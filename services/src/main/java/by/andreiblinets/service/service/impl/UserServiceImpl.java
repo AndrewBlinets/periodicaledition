@@ -6,14 +6,14 @@ import by.andreiblinets.service.service.IUserService;
 
 import java.util.List;
 
-public class UserServiceImp implements IUserService {
+public class UserServiceImpl implements IUserService {
 
-    private static UserServiceImp instance;
+    private static UserServiceImpl instance;
     private UserDAOImpl userDAO = UserDAOImpl.getInstance();
 
-    public synchronized static UserServiceImp getInstance() {
+    public synchronized static UserServiceImpl getInstance() {
         if (instance == null) {
-            instance = new UserServiceImp();
+            instance = new UserServiceImpl();
         }
         return instance;
     }
@@ -40,5 +40,9 @@ public class UserServiceImp implements IUserService {
 
     public User autification(String login, String password) {
         return userDAO.getUser(login,password);
+    }
+
+    public boolean chekLogin(User user) {
+        return userDAO.getUserLogin(user);
     }
 }

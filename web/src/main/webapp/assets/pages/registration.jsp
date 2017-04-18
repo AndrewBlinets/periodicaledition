@@ -27,7 +27,7 @@
 			${operationMessage} 
 			${errorUserExists} <br />
 			<input type="submit" value="Зарегистрировать" />
-			<a href="controller?command=back">Вернуться обратно</a>
+			<a href="controller?command=back">Назад</a>
 		</form>
 		
 		

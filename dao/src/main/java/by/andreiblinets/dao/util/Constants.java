@@ -27,6 +27,7 @@ public class Constants {
     public static final String SQL_QUERY_CREATE_USER = "INSERT INTO user (login, password, name, userrol) VALUES (?,?,?,?)";
     public static final String SQL_QUERY_GET_USER = "SELECT id, name, userrol FROM user WHERE login = ? AND password = ?";
     public static final String SQL_QUERY_GET_ALL_USER = "SELECT id, name, userrol FROM user ";
+    public static final String SQL_QUERY_GET_BY_LOGIN_USER = "SELECT * FROM users WHERE login = ?";
     public static final String SQL_QUERY_GET_BY_ID_USER = "SELECT * FROM users WHERE id = ?";
     public static final String SQL_QUERY_DELETE_BY_ID_USER = "DELETE FROM users WHERE id = ?";
     public static final String SQL_QUERY_UPDATE_BY_ID_USER = "UPDATE users SET 'name' = ?, 'userrol' = ?," +

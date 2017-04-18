@@ -11,4 +11,5 @@ public interface IUserService {
     void delete(Long id);
     User getById(Long id);
     User autification(String login, String password);
+    boolean chekLogin(User user);
 }

@@ -6,6 +6,7 @@ import by.andreiblinets.dao.entity.User;
 import by.andreiblinets.dao.entity.enums.UserRole;
 import by.andreiblinets.dao.util.Coder;
 import by.andreiblinets.dao.util.Constants;
+import com.mysql.cj.jdbc.PreparedStatement;
 import org.apache.log4j.Logger;
 
 import java.sql.ResultSet;
@@ -142,6 +143,25 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
             closePreparedStatement(preparedStatement);
         }
         return user;
+    }
+
+    public boolean getUserLogin(User user) {
+        ResultSet resultSet = null;
+        try {
+            preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_GET_BY_LOGIN_USER);
+            preparedStatement.setString(1, user.getLogin());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            logger.error("SQLException  in getUserLogin(login, password)" + e );
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+        }
+
+        return false;
     }
 
     private User getObjectUser(ResultSet resultSet) throws SQLException {
