@@ -9,6 +9,8 @@ public class PagePath {
 
     public static final String DISPATCHER_PAGE = "path.page.admin";
     public static final String PERIODICAL_PAGE = "path.page.periodicaledition";
+    public static final String ADD_ERITION_PAGE = "path.page.admin.addedition";
+
 
     private PagePath(){}
 }

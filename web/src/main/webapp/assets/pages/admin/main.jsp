@@ -11,7 +11,7 @@
 		<h4>Выберите операцию:</h4>
 		<a href="controller?command=reader">Показать список читателей</a> <br/>
 		<a href="controller?command=editions">Показать список всех изданий</a> <br/>
-		<a href="controller?command=addedition">Добавить изданий</a> <br/>
+		<a href="controller?command=add">Добавить изданий</a> <br/>
 		<a href="controller?command=logout">Выйти из системы</a> <br/>
 	</body>
 </html>
