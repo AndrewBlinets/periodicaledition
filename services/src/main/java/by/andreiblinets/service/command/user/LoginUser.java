@@ -10,6 +10,7 @@ import by.andreiblinets.service.command.manager.ConfigurationManager;
 import by.andreiblinets.service.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class LoginUser implements ICommand {
     public String execute(HttpServletRequest request) {
@@ -19,6 +20,8 @@ public class LoginUser implements ICommand {
             if(areFieldsNull(user)){
                 user = UserServiceImpl.getInstance().autification(user.getLogin(),user.getPassword());
                 if(user != null){
+                    HttpSession httpSession  = request.getSession();
+                    httpSession.setAttribute(Parameters.USER, user);
                     if (user.getUserRole().equals(UserRole.ADMINISTRATOR))
                     {
                         page = ConfigurationManager.getInstance().getProperty(PagePath.ADMIN_PAGE);

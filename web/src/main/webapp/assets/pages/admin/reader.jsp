@@ -11,7 +11,7 @@
 			<tr bgcolor="#CCCCCC">
 					<td align="center"><strong>Имя</strong></td>
 			</tr>
-			<c:forEach var="reader" items="${userList}">
+			<c:forEach var="reader" items="${readerList}">
 				<tr>
 					<td><c:out value="${ reader.Name }" /></td>
 				</tr>
