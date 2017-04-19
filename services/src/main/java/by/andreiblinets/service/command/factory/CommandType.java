@@ -1,14 +1,11 @@
 package by.andreiblinets.service.command.factory;
 
 import by.andreiblinets.service.command.ICommand;
-import by.andreiblinets.service.command.user.GoBackCommand;
-import by.andreiblinets.service.command.user.GoToRegistration;
-import by.andreiblinets.service.command.user.LoginUser;
-import by.andreiblinets.service.command.user.RegistrationCommand;
+import by.andreiblinets.service.command.user.*;
 
 public enum CommandType {
 
-    LOGIN, GOTOREGISTRATION, BACK, REGISTRATION;
+    LOGIN, GOTOREGISTRATION, BACK, REGISTRATION, LOGOUT;
 
     public ICommand getCurrentCommand() throws EnumConstantNotPresentException{
         switch(this){
@@ -19,10 +16,13 @@ public enum CommandType {
                 return new GoToRegistration();
 
             case BACK:
-                return new GoBackCommand();
+                return new BackCommand();
 
             case REGISTRATION:
-                return new RegistrationCommand();
+                return new Registration();
+
+            case LOGOUT:
+                return new LogoutUser();
 
             default:
                 return new LoginUser();

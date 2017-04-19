@@ -6,7 +6,7 @@ import by.andreiblinets.service.command.manager.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class GoBackCommand implements ICommand {
+public class BackCommand implements ICommand {
 
     public String execute(HttpServletRequest request) {
         return ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE);

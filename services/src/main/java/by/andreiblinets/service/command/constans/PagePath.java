@@ -7,5 +7,7 @@ public class PagePath {
     public static final String ADMIN_PAGE = "path.page.admin";
     public static final String ADMIN_SHOW_READER = "path.page.admin.reader";
 
+    public static final String DISPATCHER_PAGE = "path.page.admin";
+
     private PagePath(){}
 }

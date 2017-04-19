@@ -10,13 +10,11 @@ import by.andreiblinets.service.command.manager.ConfigurationManager;
 import by.andreiblinets.service.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 
-public class RegistrationCommand implements ICommand {
+public class Registration implements ICommand {
     public String execute(HttpServletRequest request) {
         String page = null;
         User user = null;
-
             user = getUser(request);
             if(areFieldsNull(user)){
                 if(!UserServiceImpl.getInstance().chekLogin(user)){
