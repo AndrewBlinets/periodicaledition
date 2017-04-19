@@ -5,6 +5,7 @@ public class Parameters {
     public Parameters() {
     }
 
+    public static final String PERIODICAL_LIST = "periodicalList";
     public static final String READERS_LIST = "readerList";
     public static final String USER = "user";
     public static final String COMMAND = "command";
