@@ -8,7 +8,7 @@ public class Constants {
             " SET 'iduser' = ?,  'kol' = ?  WHERE id = ?";
     public static final String SQL_QUERY_DELETE_PAYMENT = "DELETE FROM payment WHERE id = ?";
 
-    public static final String SQL_QUERY_CREATE_PERIODICALEDITION = "INSERT periodicaleditiontable createpayment" +
+    public static final String SQL_QUERY_CREATE_PERIODICALEDITION = "INSERT periodicaleditiontable" +
                                                                     " (name,price) VALUES (?,?)";
     public static final String SQL_QUERY_GET_ALL_PERIODICALEDITION = "SELECT * FROM periodicaleditiontable";
     public static final String SQL_QUERY_GET_BY_ID_PERIODICALEDITION = "SELECT * FROM periodicaleditiontable WHERE id = ?";

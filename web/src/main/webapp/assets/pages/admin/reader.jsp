@@ -13,7 +13,7 @@
 			</tr>
 			<c:forEach var="reader" items="${readerList}">
 				<tr>
-					<td><c:out value="${ reader.Name }" /></td>
+					<td><c:out value="${ reader.name }" /></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -6,7 +6,6 @@ import by.andreiblinets.dao.entity.User;
 import by.andreiblinets.dao.entity.enums.UserRole;
 import by.andreiblinets.dao.util.Coder;
 import by.andreiblinets.dao.util.Constants;
-import com.mysql.cj.jdbc.PreparedStatement;
 import org.apache.log4j.Logger;
 
 import java.sql.ResultSet;

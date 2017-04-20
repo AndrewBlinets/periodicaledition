@@ -1,5 +1,6 @@
 package by.andreiblinets.service.command.user;
 
+import by.andreiblinets.dao.dao.impl.PaymentDAOImpl;
 import by.andreiblinets.dao.entity.User;
 import by.andreiblinets.dao.entity.enums.UserRole;
 import by.andreiblinets.service.command.ICommand;
@@ -8,29 +9,38 @@ import by.andreiblinets.service.command.constans.PagePath;
 import by.andreiblinets.service.command.constans.Parameters;
 import by.andreiblinets.service.command.manager.ConfigurationManager;
 import by.andreiblinets.service.service.impl.UserServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class Registration implements ICommand {
+
+    private static Logger logger = Logger.getLogger(PaymentDAOImpl.class.getName());
+
     public String execute(HttpServletRequest request) {
         String page = null;
         User user = null;
+        try {
             user = getUser(request);
-            if(areFieldsNull(user)){
-                if(!UserServiceImpl.getInstance().chekLogin(user)){
+
+            if (areFieldsNull(user)) {
+                if (!UserServiceImpl.getInstance().chekLogin(user)) {
                     UserServiceImpl.getInstance().add(user);
                     page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE);
                     request.setAttribute(Parameters.OPERATION_MESSAGE, MessageConstants.SUCCESS_OPERATION);
-                }
-                else{
+                } else {
                     page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE);
                     request.setAttribute(Parameters.ERROR_USER_EXISTS, MessageConstants.USER_EXISTS);
                 }
-            }
-            else{
+            } else {
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageConstants.EMPTY_FIELDS);
                 page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE);
-            }
+            }}
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            page = ConfigurationManager.getInstance().getProperty(PagePath.ERROR_PAGE);
+        }
 
         return page;
     }

@@ -16,31 +16,36 @@ public class LoginUser implements ICommand {
     public String execute(HttpServletRequest request) {
             String page = null;
             User user = null;
-            user = getLoginAndPassword(request);
-            if(areFieldsNull(user)){
-                user = UserServiceImpl.getInstance().autification(user.getLogin(),user.getPassword());
-                if(user != null){
-                    HttpSession httpSession  = request.getSession();
-                    httpSession.setAttribute(Parameters.USER, user);
-                    if (user.getUserRole().equals(UserRole.ADMINISTRATOR))
-                    {
-                        page = ConfigurationManager.getInstance().getProperty(PagePath.ADMIN_PAGE);
+           try{
+               user = getLoginAndPassword(request);
+                if(areFieldsNull(user)){
+                    user = UserServiceImpl.getInstance().autification(user.getLogin(),user.getPassword());
+                    if(user != null){
+                        HttpSession httpSession  = request.getSession();
+                        httpSession.setAttribute(Parameters.USER, user);
+                        if (user.getUserRole().equals(UserRole.ADMINISTRATOR))
+                        {
+                            page = ConfigurationManager.getInstance().getProperty(PagePath.ADMIN_PAGE);
+                        }
+                        else
+                        {
+                            page = ConfigurationManager.getInstance().getProperty(PagePath.DISPATCHER_PAGE);
+                        }
                     }
-                    else
-                    {
-                        page = ConfigurationManager.getInstance().getProperty(PagePath.DISPATCHER_PAGE);
+                    else{
+                        page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE);
+                        request.setAttribute(Parameters.ERROR_USER_LOGIN_OR_PASSWORD, MessageConstants.ERROR_USER_LOGIN_OR_PASSWORD);
                     }
                 }
                 else{
-                    page = ConfigurationManager.getInstance().getProperty(PagePath.INDEX_PAGE);
-                    request.setAttribute(Parameters.ERROR_USER_LOGIN_OR_PASSWORD, MessageConstants.ERROR_USER_LOGIN_OR_PASSWORD);
+                    request.setAttribute(Parameters.OPERATION_MESSAGE, MessageConstants.EMPTY_FIELDS);
+                    page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE);
                 }
-            }
-            else{
-                request.setAttribute(Parameters.OPERATION_MESSAGE, MessageConstants.EMPTY_FIELDS);
-                page = ConfigurationManager.getInstance().getProperty(PagePath.REGISTRATION_PAGE);
-            }
-
+        }
+        catch (Exception e)
+        {
+        page = ConfigurationManager.getInstance().getProperty(PagePath.ERROR_PAGE);
+        }
             return page;
         }
 

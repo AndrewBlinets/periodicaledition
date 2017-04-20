@@ -22,7 +22,9 @@
 
 			</table>
 			<input type="submit" value="Добавить" />
-			<a href="controller?command=back">Назад</a>
+			${operationMessage}
+			${errorUserExists} <br />
+			<a href="controller?command=backadmin">Вернуться обратно</a>
 		</form>
 		
 		

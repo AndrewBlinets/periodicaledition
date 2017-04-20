@@ -35,11 +35,11 @@ public class PeriodicalEditionDAOImpl extends BaseDAO<PeriodicalEdition> {
         try {
             preparedStatement = connection.prepareStatement(Constants.SQL_QUERY_CREATE_PERIODICALEDITION);
             preparedStatement.setString(1, periodicalEdition.getName());
-            preparedStatement.setString(3, String.valueOf(periodicalEdition.getPrice()));
+            preparedStatement.setString(2, String.valueOf(periodicalEdition.getPrice()));
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                createId = resultSet.getLong(1);
+               // createId = resultSet.getLong(1);
             }
         } catch (SQLException e) {
             logger.error("Periodical Edition not add is system");
@@ -85,8 +85,8 @@ public class PeriodicalEditionDAOImpl extends BaseDAO<PeriodicalEdition> {
 
     private PeriodicalEdition getObjectPeriodicalEdition(ResultSet resultSet) throws SQLException {
         PeriodicalEdition periodicalEdition = new PeriodicalEdition();
-        periodicalEdition.setName(resultSet.getString(1));
-        periodicalEdition.setPrice(resultSet.getInt(2));
+        periodicalEdition.setName(resultSet.getString(2));
+        periodicalEdition.setPrice(resultSet.getInt(3));
         return periodicalEdition;
     }
 
